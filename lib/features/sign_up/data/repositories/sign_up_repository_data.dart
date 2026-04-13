@@ -2,10 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:supabase_app/core/errors/network_exceptions.dart';
 import 'package:supabase_app/core/errors/failure.dart';
-import 'package:supabase_app/features/sign_up/domain/entities/sign_up_entity.dart';
-
 import 'package:supabase_app/features/sign_up/data/datasources/sign_up_remote_data_source.dart';
-import 'package:supabase_app/features/sign_up/data/models/sign_up_model.dart';
 import 'package:supabase_app/features/sign_up/domain/repositories/sign_up_repository_domain.dart';
 
 @LazySingleton(as: SignUpRepositoryDomain)
@@ -15,7 +12,7 @@ class SignUpRepositoryData implements SignUpRepositoryDomain {
   SignUpRepositoryData(this.remoteDataSource);
 
   @override
-  Future<Result<SignUpEntity, Failure>> getSignUp({
+  Future<Result<bool, Failure>> getSignUp({
     required String email,
     required String password,
   }) async {
@@ -24,7 +21,9 @@ class SignUpRepositoryData implements SignUpRepositoryDomain {
         email: email,
         password: password,
       );
-      return Success(response.toEntity());
+      return Success(response);
+    } on Failure catch (error) {
+      return Error(error);
     } catch (error) {
       return Error(FailureExceptions.getException(error));
     }

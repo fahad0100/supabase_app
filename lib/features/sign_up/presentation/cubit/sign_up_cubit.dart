@@ -11,16 +11,17 @@ class SignUpCubit extends Cubit<SignUpState> {
     required String email,
     required String password,
   }) async {
+    emit(SignUpLoadingState());
     final result = await _signUpUseCase.getSignUp(
       email: email,
       password: password,
     );
     result.when(
       (success) {
-        //here is when success result
+        emit(SignUpSuccessState());
       },
       (whenError) {
-        //here is when error result
+        emit(SignUpErrorState(message: whenError.message));
       },
     );
   }

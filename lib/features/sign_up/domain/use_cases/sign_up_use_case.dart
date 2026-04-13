@@ -10,7 +10,7 @@ class SignUpUseCase {
 
   SignUpUseCase(this._repositoryData);
 
-  Future<Result<SignUpEntity, Failure>> getSignUp({
+  Future<Result<bool, Failure>> getSignUp({
     required String email,
     required String password,
   }) async {

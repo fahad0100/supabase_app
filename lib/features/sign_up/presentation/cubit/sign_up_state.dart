@@ -8,6 +8,9 @@ abstract class SignUpState extends Equatable {
 }
 
 class SignUpInitialState extends SignUpState {}
+
+class SignUpLoadingState extends SignUpState {}
+
 class SignUpSuccessState extends SignUpState {}
 
 class SignUpErrorState extends SignUpState {
@@ -16,4 +19,3 @@ class SignUpErrorState extends SignUpState {
   @override
   List<Object?> get props => [message];
 }
-
