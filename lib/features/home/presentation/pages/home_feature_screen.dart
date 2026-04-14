@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+import 'package:supabase_app/core/extensions/font_extensions.dart';
+import 'package:supabase_app/core/navigation/routers.dart';
+import 'package:supabase_app/core/widgets/buttons/menu_buttons.dart';
+import 'package:supabase_app/core/widgets/card/card_me.dart';
 import 'package:supabase_app/features/home/presentation/cubit/home_cubit.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomeFeatureScreen extends StatelessWidget {
   const HomeFeatureScreen({super.key});
@@ -12,15 +15,22 @@ class HomeFeatureScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Home Feature Screen')),
-      body: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              cubit.getHomeMethod();
+      floatingActionButton: FanFloatingMenuWidget(
+        menu: [
+          InoutFanFloatingMenuWidget(
+            title: "new post",
+            onTap: () {
+              context.push(Routes.addPost);
             },
-            child: Text("Save"),
           ),
         ],
+      ),
+      floatingActionButtonLocation: .centerFloat,
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: SingleChildScrollView(
+          child: Column(spacing: 16, children: [CardMe()]),
+        ),
       ),
     );
   }

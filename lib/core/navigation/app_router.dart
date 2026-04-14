@@ -9,10 +9,12 @@ import 'package:supabase_app/features/sign_up/presentation/pages/sign_up_feature
 import 'package:supabase_app/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:supabase_app/features/login/presentation/pages/login_feature_screen.dart';
 import 'package:supabase_app/features/login/presentation/cubit/login_cubit.dart';
+import 'package:supabase_app/features/add_post/presentation/pages/add_post_feature_screen.dart';
+import 'package:supabase_app/features/add_post/presentation/cubit/add_post_cubit.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.signUp,
+    initialLocation: Routes.login,
     routes: [
       GoRoute(
         path: Routes.splash,
@@ -42,6 +44,14 @@ class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) => LoginCubit(GetIt.I.get()),
           child: const LoginFeatureScreen(),
+        ),
+      ),
+
+      GoRoute(
+        path: Routes.addPost,
+        builder: (context, state) => BlocProvider(
+          create: (context) => AddPostCubit(GetIt.I.get()),
+          child: const AddPostFeatureScreen(),
         ),
       ),
     ],

@@ -15,11 +15,17 @@ class SignUpRepositoryData implements SignUpRepositoryDomain {
   Future<Result<bool, Failure>> getSignUp({
     required String email,
     required String password,
+    required String fullName,
+    required String ambition,
+    required String phone,
   }) async {
     try {
       final response = await remoteDataSource.getSignUp(
         email: email,
         password: password,
+        ambition: ambition,
+        fullName: fullName,
+        phone: phone,
       );
       return Success(response);
     } on Failure catch (error) {

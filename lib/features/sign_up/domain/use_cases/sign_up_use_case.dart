@@ -13,7 +13,16 @@ class SignUpUseCase {
   Future<Result<bool, Failure>> getSignUp({
     required String email,
     required String password,
+    required String fullName,
+    required String ambition,
+    required String phone,
   }) async {
-    return _repositoryData.getSignUp(email: email, password: password);
+    return _repositoryData.getSignUp(
+      email: email,
+      password: password,
+      ambition: ambition,
+      fullName: fullName,
+      phone: phone,
+    );
   }
 }

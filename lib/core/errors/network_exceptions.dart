@@ -96,7 +96,9 @@ class FailureExceptions {
       ),
 
       // ─── Credentials ───
-      'invalid_credentials' => const InvalidCredentialsFailure(),
+      'invalid_credentials' => const InvalidCredentialsFailure(
+        "Email or password is wrong",
+      ),
       'user_not_found' => const InvalidCredentialsFailure('Account not found'),
       'wrong_password' => const InvalidCredentialsFailure('Wrong password'),
 

@@ -6,10 +6,14 @@ class Validators {
     if (value == null || value.isEmpty) {
       return 'Email is required';
     }
-    final emailRegex = RegExp(r'^[w-.]+@([w-]+.)+[w-]{2,4}$');
+
+    // Corrected regex with backslashes for word characters (\w)
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+
     if (!emailRegex.hasMatch(value)) {
       return 'Invalid email address';
     }
+
     return null;
   }
 
@@ -17,7 +21,7 @@ class Validators {
     if (value == null || value.isEmpty) {
       return 'Password is required';
     }
-    if (value.length < 8) {
+    if (value.length <= 8) {
       return 'Password must be at least 8 characters';
     }
     return null;
@@ -38,6 +42,22 @@ class Validators {
     if (value == null || value.isEmpty) {
       return '${fieldName ?? 'This field'} is required';
     }
+
+    return null;
+  }
+
+  static String? validateFullName(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Full name is required';
+    }
+
+    // Split by one or more spaces and filter out empty strings
+    final words = value.trim().split(RegExp(r'\s+'));
+
+    if (words.length < 3) {
+      return 'Please enter your full name (at least 3 words)';
+    }
+
     return null;
   }
 

@@ -7,14 +7,21 @@ class LoginCubit extends Cubit<LoginState> {
 
   LoginCubit(this._loginUseCase) : super(LoginInitialState());
 
-  Future<void> getLoginMethod() async {
-    final result = await _loginUseCase.getLogin();
+  Future<void> getLoginMethod({
+    required String email,
+    required String password,
+  }) async {
+    emit(LoginLoadingState());
+    final result = await _loginUseCase.getLogin(
+      email: email,
+      password: password,
+    );
     result.when(
       (success) {
-        //here is when success result
+        emit(LoginSuccessState());
       },
       (whenError) {
-       //here is when error result
+        emit(LoginErrorState(message: whenError.message));
       },
     );
   }

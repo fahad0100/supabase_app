@@ -72,4 +72,3 @@ class LoadingWidget extends StatelessWidget {
     );
   }
 }
-

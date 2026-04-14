@@ -10,11 +10,17 @@ class SignUpCubit extends Cubit<SignUpState> {
   Future<void> getSignUpMethod({
     required String email,
     required String password,
+    required String fullName,
+    required String ambition,
+    required String phone,
   }) async {
     emit(SignUpLoadingState());
     final result = await _signUpUseCase.getSignUp(
       email: email,
       password: password,
+      ambition: ambition,
+      fullName: fullName,
+      phone: phone,
     );
     result.when(
       (success) {
