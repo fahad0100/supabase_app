@@ -1,33 +1,26 @@
 import 'package:injectable/injectable.dart';
+import 'package:supabase_app/core/common/models/profile_model.dart';
+import 'package:supabase_app/core/services/profile_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:supabase_app/core/services/local_keys_service.dart';
-import 'package:supabase_app/features/profile/data/models/profile_model.dart';
 import 'package:supabase_app/core/errors/network_exceptions.dart';
-
 
 abstract class BaseProfileRemoteDataSource {
   Future<ProfileModel> getProfile();
 }
 
-
 @LazySingleton(as: BaseProfileRemoteDataSource)
 class ProfileRemoteDataSource implements BaseProfileRemoteDataSource {
- 
   final SupabaseClient _supabase;
-  final LocalKeysService _localKeysService;
-  
-  
+  final ProfileService _profileService;
 
-   ProfileRemoteDataSource(this._localKeysService, this._supabase);
+  ProfileRemoteDataSource(this._profileService, this._supabase);
 
-
-
-    @override
+  @override
   Future<ProfileModel> getProfile() async {
     try {
-      return ProfileModel(id: 1, firstName: "Last Name", lastName: "First Name");
+      return _profileService.profile!;
     } catch (error) {
-     throw FailureExceptions.getException(error);
+      throw FailureExceptions.getException(error);
     }
   }
 }

@@ -7,14 +7,15 @@ class AddPostCubit extends Cubit<AddPostState> {
 
   AddPostCubit(this._addPostUseCase) : super(AddPostInitialState());
 
-  Future<void> getAddPostMethod() async {
-    final result = await _addPostUseCase.getAddPost();
+  Future<void> getAddPostMethod({required String content}) async {
+    emit(AddPostLoadingState());
+    final result = await _addPostUseCase.getAddPost(content: content);
     result.when(
       (success) {
-        //here is when success result
+        emit(AddPostSuccessState());
       },
       (whenError) {
-       //here is when error result
+        emit(AddPostErrorState(message: whenError.message));
       },
     );
   }

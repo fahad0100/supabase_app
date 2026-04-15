@@ -11,7 +11,7 @@ class AddPostUseCase {
 
   AddPostUseCase(this._repositoryData);
 
-   Future<Result<AddPostEntity, Failure>> getAddPost() async {
-    return _repositoryData.getAddPost();
+   Future<Result<AddPostEntity, Failure>> getAddPost({required String content}) async {
+    return _repositoryData.getAddPost(content: content);
   }
 }

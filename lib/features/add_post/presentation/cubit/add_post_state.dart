@@ -9,6 +9,7 @@ abstract class AddPostState extends Equatable {
 
 class AddPostInitialState extends AddPostState {}
 class AddPostSuccessState extends AddPostState {}
+class AddPostLoadingState extends AddPostState {}
 
 class AddPostErrorState extends AddPostState {
   final String message;

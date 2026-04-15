@@ -29,7 +29,7 @@ class LoginFeatureScreen extends HookWidget {
                 context.showLoading();
                 break;
               case LoginSuccessState _:
-                context.go(Routes.home);
+                context.go(Routes.loading);
                 break;
               case LoginErrorState _:
                 context.showSnackBar(state.message, isError: true);

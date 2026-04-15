@@ -1,22 +1,20 @@
-
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
+import 'package:supabase_app/core/common/entity/profile_entity.dart';
+import 'package:supabase_app/core/common/models/profile_model.dart';
 import 'package:supabase_app/core/errors/network_exceptions.dart';
 import 'package:supabase_app/core/errors/failure.dart';
-import 'package:supabase_app/features/profile/domain/entities/profile_entity.dart';
 
 import 'package:supabase_app/features/profile/data/datasources/profile_remote_data_source.dart';
-import 'package:supabase_app/features/profile/data/models/profile_model.dart';
 import 'package:supabase_app/features/profile/domain/repositories/profile_repository_domain.dart';
 
 @LazySingleton(as: ProfileRepositoryDomain)
-class ProfileRepositoryData implements ProfileRepositoryDomain{
+class ProfileRepositoryData implements ProfileRepositoryDomain {
   final BaseProfileRemoteDataSource remoteDataSource;
-
 
   ProfileRepositoryData(this.remoteDataSource);
 
-@override
+  @override
   Future<Result<ProfileEntity, Failure>> getProfile() async {
     try {
       final response = await remoteDataSource.getProfile();

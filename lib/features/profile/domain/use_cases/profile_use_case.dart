@@ -1,9 +1,8 @@
 import 'package:multiple_result/multiple_result.dart';
 import 'package:injectable/injectable.dart';
+import 'package:supabase_app/core/common/entity/profile_entity.dart';
 import 'package:supabase_app/core/errors/failure.dart';
-import 'package:supabase_app/features/profile/domain/entities/profile_entity.dart';
 import 'package:supabase_app/features/profile/domain/repositories/profile_repository_domain.dart';
-
 
 @lazySingleton
 class ProfileUseCase {
@@ -11,7 +10,7 @@ class ProfileUseCase {
 
   ProfileUseCase(this._repositoryData);
 
-   Future<Result<ProfileEntity, Failure>> getProfile() async {
+  Future<Result<ProfileEntity, Failure>> getProfile() async {
     return _repositoryData.getProfile();
   }
 }

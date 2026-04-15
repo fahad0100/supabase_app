@@ -14,6 +14,8 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
   await setup();
   await configureDependencies();
+  // await GetIt.I.get<SupabaseClient>().auth.signOut(scope: .global);
+  // await GetIt.I.get<SupabaseClient>().auth.signOut(scope: .local);
 
   runApp(
     EasyLocalization(

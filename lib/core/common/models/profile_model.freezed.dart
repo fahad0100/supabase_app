@@ -210,8 +210,8 @@ return $default(_that.id,_that.ambition,_that.fullName,_that.email,_that.phone);
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(fieldRename: .snake)
 class _ProfileModel implements ProfileModel {
   const _ProfileModel({required this.id, required this.ambition, required this.fullName, required this.email, required this.phone});
   factory _ProfileModel.fromJson(Map<String, dynamic> json) => _$ProfileModelFromJson(json);

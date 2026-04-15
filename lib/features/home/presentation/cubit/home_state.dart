@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:supabase_app/features/home/domain/entities/post_entity.dart';
 
 abstract class HomeState extends Equatable {
   const HomeState();
@@ -8,7 +9,12 @@ abstract class HomeState extends Equatable {
 }
 
 class HomeInitialState extends HomeState {}
-class HomeSuccessState extends HomeState {}
+
+class HomeSuccessState extends HomeState {
+  final List<PostEntity> posts;
+
+  const HomeSuccessState({required this.posts});
+}
 
 class HomeErrorState extends HomeState {
   final String message;
@@ -16,4 +22,3 @@ class HomeErrorState extends HomeState {
   @override
   List<Object?> get props => [message];
 }
-

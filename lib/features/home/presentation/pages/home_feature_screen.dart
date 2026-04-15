@@ -8,7 +8,9 @@ import 'package:supabase_app/core/extensions/font_extensions.dart';
 import 'package:supabase_app/core/navigation/routers.dart';
 import 'package:supabase_app/core/widgets/buttons/menu_buttons.dart';
 import 'package:supabase_app/core/widgets/card/card_me.dart';
+import 'package:supabase_app/core/widgets/loading_widget.dart';
 import 'package:supabase_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:supabase_app/features/home/presentation/cubit/home_state.dart';
 
 class HomeFeatureScreen extends StatelessWidget {
   const HomeFeatureScreen({super.key});
@@ -31,7 +33,11 @@ class HomeFeatureScreen extends StatelessWidget {
           InoutFanFloatingMenuWidget(
             title: "new post",
             onTap: () {
-              context.push(Routes.addPost);
+              context.push(Routes.addPost).then((value) {
+                if (value == true) {
+                  cubit.getHomeMethod();
+                }
+              });
             },
           ),
         ],
@@ -39,8 +45,18 @@ class HomeFeatureScreen extends StatelessWidget {
       floatingActionButtonLocation: .centerFloat,
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: SingleChildScrollView(
-          child: Column(spacing: 16, children: [CardMe()]),
+        child: BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            if (state is HomeSuccessState) {
+              return ListView.builder(
+                itemCount: state.posts.length,
+                padding: EdgeInsets.all(9),
+
+                itemBuilder: (context, index) => CardMe(),
+              );
+            }
+            return LoadingWidget();
+          },
         ),
       ),
     );
