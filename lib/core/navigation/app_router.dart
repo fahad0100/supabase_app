@@ -11,10 +11,15 @@ import 'package:supabase_app/features/login/presentation/pages/login_feature_scr
 import 'package:supabase_app/features/login/presentation/cubit/login_cubit.dart';
 import 'package:supabase_app/features/add_post/presentation/pages/add_post_feature_screen.dart';
 import 'package:supabase_app/features/add_post/presentation/cubit/add_post_cubit.dart';
+import 'package:supabase_app/features/loading/presentation/pages/loading_feature_screen.dart';
+import 'package:supabase_app/features/loading/presentation/cubit/loading_cubit.dart';
+import 'package:supabase_app/features/profile/presentation/pages/profile_feature_screen.dart';
+import 'package:supabase_app/features/profile/presentation/cubit/profile_cubit.dart';
+
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.login,
+    initialLocation: Routes.loading,
     routes: [
       GoRoute(
         path: Routes.splash,
@@ -54,7 +59,23 @@ class AppRouter {
           child: const AddPostFeatureScreen(),
         ),
       ),
-    ],
+
+      GoRoute(
+        path: Routes.loading,
+        builder: (context, state) => BlocProvider(
+          create: (context) => LoadingCubit(GetIt.I.get()),
+          child: const LoadingFeatureScreen(),
+        ),
+      ),
+    
+  GoRoute(
+    path: Routes.profile,
+    builder: (context, state) => BlocProvider(
+          create: (context) => ProfileCubit(GetIt.I.get()),
+          child: const ProfileFeatureScreen(),
+        ),
+  ),
+],
 
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),

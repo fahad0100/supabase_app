@@ -5,6 +5,8 @@ import 'package:supabase_app/features/home/di/home_di.dart';
 import 'package:supabase_app/features/sign_up/di/sign_up_di.dart';
 import 'package:supabase_app/features/login/di/login_di.dart';
 import 'package:supabase_app/features/add_post/di/add_post_di.dart';
+import 'package:supabase_app/features/loading/di/loading_di.dart';
+import 'package:supabase_app/features/profile/di/profile_di.dart';
 
 @InjectableInit(
   initializerName: 'init', 
@@ -20,4 +22,6 @@ Future<void> configureDependencies() async {
     configureSignUp(getIt);
     configureLogin(getIt);
     configureAddPost(getIt);
+    configureLoading(getIt);
+    configureProfile(getIt);
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconoir_flutter/regular/iconoir.dart';
+import 'package:iconoir_flutter/regular/user_circle.dart';
+import 'package:not_static_icons/not_static_icons.dart';
 import 'package:supabase_app/core/extensions/font_extensions.dart';
 import 'package:supabase_app/core/navigation/routers.dart';
 import 'package:supabase_app/core/widgets/buttons/menu_buttons.dart';
@@ -14,7 +17,15 @@ class HomeFeatureScreen extends StatelessWidget {
     final cubit = context.read<HomeCubit>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Home Feature Screen')),
+      appBar: AppBar(
+        title: const Text('Home Feature Screen'),
+        leading: IconButton(
+          onPressed: () {
+            context.push(Routes.profile);
+          },
+          icon: UserCircle(color: Colors.red),
+        ),
+      ),
       floatingActionButton: FanFloatingMenuWidget(
         menu: [
           InoutFanFloatingMenuWidget(
